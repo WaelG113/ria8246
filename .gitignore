@@ -1,2 +1,5 @@
+# Avoid pushing build rubbish to repository
+# by KRiSTóF
+
 /build/
 /dist/

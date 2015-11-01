@@ -1,0 +1,5 @@
+# Avoid merging these files
+# by KRiSTóF
+
+*.xml binary
+*.properties binary
