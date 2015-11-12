@@ -12,7 +12,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import objects.Ball;
+import objects.Square;
 
 /**
  *
@@ -23,6 +26,7 @@ public class PhysicsSimulator extends Application
     private Stage stage;
     private Scene scene;
     private BorderPane root;
+    private Pane tools;
     
     @Override
     @SuppressWarnings ("UnnecessaryReturnStatement")
@@ -35,7 +39,8 @@ public class PhysicsSimulator extends Application
 	this.stage.setScene (this.scene);
 	this.stage.setTitle ("Physics Simulator");
 	this.stage.show ();
-	
+        setTools();
+        
 	return;
     }
     
@@ -70,5 +75,13 @@ public class PhysicsSimulator extends Application
 	launch (args);
 	
 	return;
+    }
+
+    private void setTools() {
+        tools = (Pane) root.lookup("#tools");
+        Ball ball = new Ball(20, 20, 10);
+        Square square = new Square(40, 20, 10, 10);
+	tools.getChildren().addAll(ball, square);
+        
     }
 }
