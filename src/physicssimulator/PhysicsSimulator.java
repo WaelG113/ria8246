@@ -34,7 +34,11 @@ public class PhysicsSimulator extends Application
 	this.stage = stage;
 	this.stage.setScene (this.scene);
 	this.stage.setTitle ("Physics Simulator");
+        
+        
 	this.stage.show ();
+        
+        
 	
 	return;
     }
@@ -49,8 +53,10 @@ public class PhysicsSimulator extends Application
 	    root = (BorderPane) loader.load ();
 	    RootLayoutController controller = loader.getController ();
 	    controller.setMainApplication (this);
-	    
+	   
+            
 	    Scene scene = new Scene (root);
+            
 	    this.scene = scene;
 	    
 	    return;
