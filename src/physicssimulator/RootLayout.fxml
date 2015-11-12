@@ -6,21 +6,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="physicssimulator.RootLayoutController" >
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"  fx:controller="physicssimulator.RootLayoutController">
    <top>
-      <Label text="Top" BorderPane.alignment="CENTER" />
+      <Pane minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <Pane fx:id="tools" BorderPane.alignment="CENTER" />
+      <Pane fx:id="tools" minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;"  BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <Label text="Center" BorderPane.alignment="CENTER" />
+      <Pane  style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <Label text="Right" BorderPane.alignment="CENTER" />
+      <Pane minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <Label text="Bottom" BorderPane.alignment="CENTER" />
+      <Pane minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
