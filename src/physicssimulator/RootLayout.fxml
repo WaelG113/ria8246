@@ -6,20 +6,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"  maxWidth="500" maxHeight="500" minHeight="500" minWidth="500"   xmlns="http://javafx.com/javafx/8"  fx:controller="physicssimulator.RootLayoutController" >
+<BorderPane maxHeight="500" maxWidth="500" minHeight="500" minWidth="500" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="physicssimulator.RootLayoutController">
    <top>
-      <Pane fx:id="menu" minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="menu" minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <Pane fx:id="tools" minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;"  BorderPane.alignment="CENTER" />
+      <Pane fx:id="tools" minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <Pane fx:id="main" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="main" style="-fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <Pane fx:id="properties"  minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="properties" minWidth="50.0" style="-fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <Pane fx:id="results" minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: 000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="results" minHeight="50.0" style="-fx-border-width: 1; -fx-border-color: #000000; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
