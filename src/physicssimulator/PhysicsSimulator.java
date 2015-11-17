@@ -33,6 +33,7 @@ public class PhysicsSimulator extends Application {
     private Pane tools, main, properties, results, menu;
     private Ball ball;
     private Square square;
+    private RootLayoutController rootLayoutController;
 
     @Override
     @SuppressWarnings("UnnecessaryReturnStatement")
@@ -60,6 +61,7 @@ public class PhysicsSimulator extends Application {
             root = (BorderPane) loader.load();
             RootLayoutController controller = loader.getController();
             controller.setMainApplication(this);
+	    rootLayoutController = controller;
 
             Scene scene = new Scene(root);
             this.scene = scene;
