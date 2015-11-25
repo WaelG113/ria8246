@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015.11.17., 12:11:48
+    Author     : jdev
+*/
+
+.root
+{
+    -fx-font-family: "Amble";
+    -fx-font-size: 12pt;
+}
+
+.button, .toggle-button
+{
+     -fx-font-weight: normal;
+}
+
+.label
+{
+    -fx-font-family: "Amble";
+    -fx-font-size: 11pt;
+}
+
+.text-field
+{
+    -fx-font-family: "Amble";
+    -fx-font-size: 10pt;
+}
+
+#visualNodePane, #visualCanvasPane, #propertiesLabel, #actionsLabel
+{
+    -fx-font-family: "Amble";
+    -fx-font-weight: bold;
+}
+
+#propertiesPane
+{
+    -fx-background-color: silver;
+}
+
+#visualNodePane
+{
+    -fx-background-color: goldenrod;
+}
+
+#visualCanvasPane
+{
+    -fx-background-color: teal;
+}
+
+#pendulumCanvas
+{
+    -fx-border-color: red;
+    -fx-border-width: 2;
+    -fx-border-style: dashed;
+}
