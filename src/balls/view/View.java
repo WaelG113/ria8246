@@ -151,7 +151,7 @@ public class View {
     }
 
    
-    private void drawBall(float x, float y,float r) {
+    public void drawBall(float x, float y,float r) {
         gc.setFill(Color.BLACK);
         gc.fillOval(x, y, r, r);
     }
