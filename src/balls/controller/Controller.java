@@ -19,6 +19,9 @@ public class Controller {
     public Controller(Model model) {
         this.model = model;
     }
+
+    public Controller() {
+    }
     
     
 
