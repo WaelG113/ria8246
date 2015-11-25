@@ -10,38 +10,36 @@ package balls.model;
  * @author n0g3
  */
 public class Model {
-    private float gravity;
+    
+    private final int START = 0;
+    private final int FREE_FALL = 1;
+    private final int ON_GROUND = 2;
+    private final int REBOUND = 3;
+    
     private float weight;
     private float acceleration;
     private float radius;
     private float velocity;
     private float distance;
     private int time;
+    private int state;
+    private float gravity;
 
     public Model() {
     }
 
-    public Model(float gravity, float weight, float acceleration, float radius, float velocity) {
-        this.gravity = gravity;
+    public Model(float weight, float acceleration, float radius, float velocity, float distance, int time, float gravity) {
         this.weight = weight;
         this.acceleration = acceleration;
         this.radius = radius;
         this.velocity = velocity;
-    }
-
-    /**
-     * @return the gravity
-     */
-    public float getGravity() {
-        return gravity;
-    }
-
-    /**
-     * @param gravity the gravity to set
-     */
-    public void setGravity(float gravity) {
+        this.distance = distance;
+        this.time = time;
+        this.state = START;
         this.gravity = gravity;
     }
+
+    
 
     /**
      * @return the weight
@@ -125,5 +123,33 @@ public class Model {
      */
     public void setTime(int time) {
         this.time = time;
+    }
+
+    /**
+     * @return the state
+     */
+    public int getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the gravity
+     */
+    public float getGravity() {
+        return gravity;
+    }
+
+    /**
+     * @param gravity the gravity to set
+     */
+    public void setGravity(float gravity) {
+        this.gravity = gravity;
     }
 }
