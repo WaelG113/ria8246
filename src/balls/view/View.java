@@ -27,6 +27,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +37,7 @@ import javafx.stage.Stage;
  */
 public class View {
 
-    private Model model;
+    
     private Controller controller;
 
     private AnchorPane root;
@@ -43,6 +45,8 @@ public class View {
     private Stage stage;
     private Slider gravitySlider;
     private Label gravityValueLabel;
+    private GraphicsContext gc;
+    private Button startButton;
 
     public View() {
         initGui();
@@ -52,17 +56,21 @@ public class View {
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
         AnchorPane canPane = new AnchorPane();
+        
         Canvas canvas = new Canvas(400, 400);
+        gc = canvas.getGraphicsContext2D();
         canPane.setStyle("-fx-background-color: #96bbfc");
-
+       
         Label gravityLabel = new Label("Gravity");
-        setGravitySlider(new Slider(0, 15, 9.3));
-
-        setGravityValueLabel(new Label(String.valueOf(gravitySlider.getValue())));
-        gravitySlider.setMajorTickUnit(0.1);
+        setGravitySlider(new Slider(0, 30, 9));
+        
+        startButton = new Button("START");
+        
+        setGravityValueLabel(new Label(String.valueOf(gravitySlider.getValue())));     
         gridPane.add(gravityLabel, 0, 0);
         gridPane.add(getGravitySlider(), 1, 0);
         gridPane.add(getGravityValueLabel(), 2, 0);
+        gridPane.add(startButton,1,1);
 
         canPane.getChildren().add(canvas);
 
@@ -140,6 +148,26 @@ public class View {
      */
     public void setGravityValueLabel(Label gravityValueLabel) {
         this.gravityValueLabel = gravityValueLabel;
+    }
+
+   
+    private void drawBall(float x, float y,float r) {
+        gc.setFill(Color.BLACK);
+        gc.fillOval(x, y, r, r);
+    }
+
+    /**
+     * @return the button
+     */
+    public Button getButton() {
+        return startButton;
+    }
+
+    /**
+     * @param button the button to set
+     */
+    public void setButton(Button button) {
+        this.startButton = button;
     }
 
 }
