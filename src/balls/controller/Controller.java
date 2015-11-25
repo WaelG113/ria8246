@@ -13,11 +13,20 @@ import balls.view.View;
  * @author n0g3
  */
 public class Controller {
-
+    
+    //ball states
+    private final int START = 0;
+    private final int FREE_FALL = 1;
+    private final int ON_GROUND = 2;
+    private final int REBOUND = 3;
+    
     private Model model;
+    private View view;
+    
 
-    public Controller(Model model) {
+    public Controller(Model model, View view) {
         this.model = model;
+        this.view = view;
     }
 
     public Controller() {
@@ -29,17 +38,40 @@ public class Controller {
         return (model.getDistance() / (getModel().getTime() * getModel().getTime()));
     }
     
-    public float computeFreeFallVelocity(){
-        return ((model.getGravity() / 2) * (getModel().getTime() * getModel().getTime()));
+    public float computeDistance(){
+        return ((float)(model.getGravity() / 2) * (getModel().getTime() * getModel().getTime()));
+    }
+   
+    
+    public float computeDeceleration(float acceleration){
+        return ((float) acceleration / 2);
     }
     
-    private float computeDeceleration(){
-        return (model.getAcceleration() / 2);
+    public void computeVelocity(){
+        float tempAcc = 0, tempVel = 0;
+        switch(model.getState()){
+            case START:
+                model.setVelocity(0);
+                model.setAcceleration(0);
+                break;
+            case FREE_FALL:
+                model.setAcceleration(model.getGravity());
+                model.setVelocity(model.getAcceleration() * model.getTime());
+                break;
+            case ON_GROUND:
+                tempAcc = model.getAcceleration();
+                tempVel = model.getVelocity();
+                model.setAcceleration(0);
+                model.setVelocity(0);
+                break;
+            case REBOUND:
+                model.setAcceleration(computeDeceleration(tempAcc));
+                model.setVelocity(tempVel * model.getAcceleration() - model.getGravity());
+        }
     }
     
-    private float computeVelocity(){
-        return (model.getAcceleration() * model.getTime());
-    }
+    
+   
 
     /**
      * @return the model
@@ -54,5 +86,19 @@ public class Controller {
     public void setModel(Model model) {
         this.model = model;
     }    
+
+    /**
+     * @return the view
+     */
+    public View getView(){
+        return view;
+    }
+
+    /**
+     * @param view the view to set
+     */
+    public void setView(View view) {
+        this.view = view;
+    }
     
 }
