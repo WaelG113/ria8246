@@ -44,6 +44,7 @@ private AnchorPane root;
 private Scene scene;
 private Stage stage;
 private Slider gravitySlider;
+private Label gravityValueLabel;
 
 public View(){
     initGui();
@@ -57,14 +58,17 @@ private void initGui(){
     canPane.setStyle("-fx-background-color: #96bbfc");
     
     Label gravityLabel = new Label("Gravity");
-        setGravitySlider(new Slider(0, 15, 9.3));
+    setGravitySlider(new Slider(0, 15, 9.3));
+        setGravityValueLabel(new Label(String.valueOf(gravitySlider.getValue())));
+    
+    
     gridPane.add(gravityLabel, 0, 0);
     gridPane.add(getGravitySlider(), 1, 0);
-    
+    gridPane.add(getGravityValueLabel(), 2, 0);
     
     canPane.getChildren().add(canvas);
     
-    Label lab = new Label("Yolo");
+    
     
     
     
@@ -137,6 +141,20 @@ private void initGui(){
      */
     public void setGravitySlider(Slider gravitySlider) {
         this.gravitySlider = gravitySlider;
+    }
+
+    /**
+     * @return the gravityValueLabel
+     */
+    public Label getGravityValueLabel() {
+        return gravityValueLabel;
+    }
+
+    /**
+     * @param gravityValueLabel the gravityValueLabel to set
+     */
+    public void setGravityValueLabel(Label gravityValueLabel) {
+        this.gravityValueLabel = gravityValueLabel;
     }
 
 
