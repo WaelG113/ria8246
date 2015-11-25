@@ -21,7 +21,7 @@ public class Model {
     private float radius;
     private float velocity;
     private float distance;
-    private int time;
+    private float time;
     private int state;
     private float gravity;
     private float x;
@@ -29,13 +29,13 @@ public class Model {
 
     public Model() {
         this.weight = 10f;
-        this.acceleration = 9f;
+        this.acceleration = 0.5f;
         this.radius = 10f;
-        this.velocity = 0f;
+        this.velocity = 0.5f;
         this.distance = 0f;
-        this.time = 0;
+        this.time = 0.1f;
         this.state = START;
-        this.gravity = 9.3f;
+        this.gravity = 0.5f;
         this.x = 20f;
         this.y = 20f;
     }
@@ -116,14 +116,14 @@ public class Model {
     /**
      * @return the time
      */
-    public int getTime() {
+    public float getTime() {
         return time;
     }
 
     /**
      * @param time the time to set
      */
-    public void setTime(int time) {
+    public void setTime(float time) {
         this.time = time;
     }
 
