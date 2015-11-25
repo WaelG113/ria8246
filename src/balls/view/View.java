@@ -62,7 +62,7 @@ public class View {
         canPane.setStyle("-fx-background-color: #96bbfc");
        
         Label gravityLabel = new Label("Gravity");
-        setGravitySlider(new Slider(1, 30, 9f));
+        setGravitySlider(new Slider(1, 30,9));
         
         startButton = new Button("START");
         
