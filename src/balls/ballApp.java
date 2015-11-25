@@ -6,6 +6,7 @@
 package balls;
 
 import balls.controller.Controller;
+import balls.model.Model;
 import balls.view.View;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,7 +22,8 @@ import javafx.stage.Stage;
  */
 public class ballApp extends Application {
     View view = new View();
-    Controller controller = new Controller();
+    Model model = new Model();
+    Controller controller = new Controller(model,view);
     @Override
     public void start(Stage primaryStage) {
         view.setStage(primaryStage);
