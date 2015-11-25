@@ -7,6 +7,7 @@ package balls.controller;
 
 import balls.model.Model;
 import balls.view.View;
+import javafx.scene.control.Slider;
 
 /**
  *
@@ -32,7 +33,9 @@ public class Controller {
     public Controller() {
     }
     
-    
+    public void setModelGravity(){
+        model.setGravity((float)view.getGravitySlider().getValue());
+    }
 
     public float computeAcceleration() {
         return (model.getDistance() / (getModel().getTime() * getModel().getTime()));
