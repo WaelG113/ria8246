@@ -33,57 +33,44 @@ import javafx.stage.Stage;
  *
  * @author n0g3
  */
-
-
 public class View {
 
-private Model model;
-private Controller controller;
+    private Model model;
+    private Controller controller;
 
-private AnchorPane root;
-private Scene scene;
-private Stage stage;
-private Slider gravitySlider;
-private Label gravityValueLabel;
+    private AnchorPane root;
+    private Scene scene;
+    private Stage stage;
+    private Slider gravitySlider;
+    private Label gravityValueLabel;
 
-public View(){
-    initGui();
-}
+    public View() {
+        initGui();
+    }
 
-private void initGui(){
-    VBox vBox = new VBox();
-    GridPane gridPane = new GridPane();
-    AnchorPane canPane = new AnchorPane();
-    Canvas canvas = new Canvas(400,400);
-    canPane.setStyle("-fx-background-color: #96bbfc");
-    
-    Label gravityLabel = new Label("Gravity");
-    setGravitySlider(new Slider(0, 15, 9.3));
+    private void initGui() {
+        VBox vBox = new VBox();
+        GridPane gridPane = new GridPane();
+        AnchorPane canPane = new AnchorPane();
+        Canvas canvas = new Canvas(400, 400);
+        canPane.setStyle("-fx-background-color: #96bbfc");
+
+        Label gravityLabel = new Label("Gravity");
+        setGravitySlider(new Slider(0, 15, 9.3));
+
         setGravityValueLabel(new Label(String.valueOf(gravitySlider.getValue())));
-    
-    
-    gridPane.add(gravityLabel, 0, 0);
-    gridPane.add(getGravitySlider(), 1, 0);
-    gridPane.add(getGravityValueLabel(), 2, 0);
-    
-    canPane.getChildren().add(canvas);
-    
-    
-    
-    
-    
-    vBox.getChildren().addAll(canPane,gridPane);
-    
-    
-    
-    
-         
-        
+        gravitySlider.setMajorTickUnit(0.1);
+        gridPane.add(gravityLabel, 0, 0);
+        gridPane.add(getGravitySlider(), 1, 0);
+        gridPane.add(getGravityValueLabel(), 2, 0);
+
+        canPane.getChildren().add(canvas);
+
+        vBox.getChildren().addAll(canPane, gridPane);
+
         scene = new Scene(vBox);
-          
-    
-    
-}
+
+    }
 
     /**
      * @return the controller
@@ -98,8 +85,6 @@ private void initGui(){
     public void setController(Controller controller) {
         this.controller = controller;
     }
-
- 
 
     /**
      * @return the scene
@@ -156,7 +141,5 @@ private void initGui(){
     public void setGravityValueLabel(Label gravityValueLabel) {
         this.gravityValueLabel = gravityValueLabel;
     }
-
-
 
 }
