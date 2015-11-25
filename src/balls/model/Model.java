@@ -24,6 +24,8 @@ public class Model {
     private int time;
     private int state;
     private float gravity;
+    private float x;
+    private float y;
 
     public Model() {
         this.weight = 10f;
@@ -34,6 +36,8 @@ public class Model {
         this.time = 0;
         this.state = START;
         this.gravity = 9.3f;
+        this.x = 20f;
+        this.y = 20f;
     }
 
 
@@ -149,5 +153,33 @@ public class Model {
      */
     public void setGravity(float gravity) {
         this.gravity = gravity;
+    }
+
+    /**
+     * @return the x
+     */
+    public float getX() {
+        return x;
+    }
+
+    /**
+     * @param x the x to set
+     */
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    /**
+     * @return the y
+     */
+    public float getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(float y) {
+        this.y = y;
     }
 }

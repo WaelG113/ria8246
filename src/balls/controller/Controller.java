@@ -42,7 +42,7 @@ public class Controller {
             @Override
             public void handle(MouseEvent event) {
                 setModelGravity();
-                view.getGravityValueLabel().setText(String.valueOf(gravitySlider.getValue()));
+                view.getGravityValueLabel().setText(String.valueOf((int)gravitySlider.getValue()));
             }
         });
     }
