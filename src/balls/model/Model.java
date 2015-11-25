@@ -26,18 +26,16 @@ public class Model {
     private float gravity;
 
     public Model() {
+        this.weight = 10f;
+        this.acceleration = 9f;
+        this.radius = 10f;
+        this.velocity = 0f;
+        this.distance = 0f;
+        this.time = 0;
+        this.state = START;
+        this.gravity = 9.3f;
     }
 
-    public Model(float weight, float acceleration, float radius, float velocity, float distance, int time, float gravity) {
-        this.weight = weight;
-        this.acceleration = acceleration;
-        this.radius = radius;
-        this.velocity = velocity;
-        this.distance = distance;
-        this.time = time;
-        this.state = START;
-        this.gravity = gravity;
-    }
 
     
 
