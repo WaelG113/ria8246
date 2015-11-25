@@ -64,7 +64,7 @@ public class Controller {
                                     model.setState(FREE_FALL);
                                     break;
                             }
-                            System.out.println("acc: " + model.getVelocity());
+                            System.out.println("vel: " + model.getVelocity());
                             model.setTime(model.getTime() + 0.2f);
                             computeVelocity();
                             try {
@@ -85,6 +85,7 @@ public class Controller {
     private void initItems() {
         //sliders
         gravitySlider = view.getGravitySlider();
+        model.setGravity((float)gravitySlider.getValue());
         //button
         startButton = view.getButton();
     }
