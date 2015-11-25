@@ -5,8 +5,6 @@
  */
 package balls;
 
-import balls.controller.Controller;
-import balls.view.View;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,26 +17,28 @@ import javafx.stage.Stage;
  *
  * @author n0g3
  */
-public class ballApp extends Application {
-    View view = new View();
-    Controller controller = new Controller();
+public class NewFXMain extends Application {
+    
     @Override
     public void start(Stage primaryStage) {
-        view.setStage(primaryStage);
-        Scene scene = view.getScene();
-        Stage mainStage;
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
         
-	mainStage = primaryStage;
-
-	mainStage.setTitle ("Pendulum Application");
-	mainStage.setScene (scene);
-	
-	mainStage.setResizable (false);
-        mainStage.show();
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
         
+        Scene scene = new Scene(root, 300, 250);
         
-        
-       
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**

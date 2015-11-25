@@ -14,6 +14,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import balls.view.LayoutController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -30,47 +43,43 @@ private LayoutController layoutController;
 private AnchorPane root;
 private Scene scene;
 private Stage stage;
+private Slider gravitySlider;
 
-public void createScene ()
-    {
-	
+public View(){
+    initGui();
+}
 
-	try
-	{
-	    FXMLLoader loader = new FXMLLoader ();
-	    loader.setLocation (this.getClass ().getResource ("layout.fxml"));
-	    root = (AnchorPane) loader.load ();
-
-	    LayoutController experimentController = loader.getController ();
-	    experimentController.setMain (this);
-	    experimentController.initialise ();
-	    setLayoutController(experimentController);  
-	}
-	catch (IOException ex)
-	{
-	    Logger.getLogger (pendulum.view.View.class.getName ()).log (Level.SEVERE, null, ex);
-	}
-
-	scene = new Scene (root);
-	setMainScene(scene);
-
-	return;
-
-    }
-
-    /**
-     * @return the model
-     */
-    public Model getModel() {
-        return model;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(Model model) {
-        this.model = model;
-    }
+private void initGui(){
+    VBox vBox = new VBox();
+    GridPane gridPane = new GridPane();
+    AnchorPane canPane = new AnchorPane();
+    Canvas canvas = new Canvas(400,400);
+    canPane.setStyle("-fx-background-color: #96bbfc");
+    
+    Label gravityLabel = new Label("Gravity");
+        setGravitySlider(new Slider(0, 15, 9.3));
+    gridPane.add(gravityLabel, 0, 0);
+    gridPane.add(getGravitySlider(), 1, 0);
+    
+    
+    canPane.getChildren().add(canvas);
+    
+    Label lab = new Label("Yolo");
+    
+    
+    
+    vBox.getChildren().addAll(canPane,gridPane);
+    
+    
+    
+    
+         
+        
+        scene = new Scene(vBox);
+          
+    
+    
+}
 
     /**
      * @return the controller
@@ -101,34 +110,47 @@ public void createScene ()
     }
 
     /**
-     * @return the mainScene
+     * @return the scene
      */
     public Scene getScene() {
         return scene;
     }
 
     /**
-     * @param mainScene the mainScene to set
+     * @param scene the scene to set
      */
-    public void setScene(Scene mainScene) {
-        this.scene = mainScene;
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 
     /**
-     * @return the mainStage
+     * @return the stage
      */
-    public Stage getMainStage() {
+    public Stage getStage() {
         return stage;
     }
 
     /**
-     * @param mainStage the mainStage to set
+     * @param stage the stage to set
      */
-    public void setMainStage(Stage mainStage) {
-        this.stage = mainStage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    private void setMainScene(Scene scene) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @return the gravitySlider
+     */
+    public Slider getGravitySlider() {
+        return gravitySlider;
     }
+
+    /**
+     * @param gravitySlider the gravitySlider to set
+     */
+    public void setGravitySlider(Slider gravitySlider) {
+        this.gravitySlider = gravitySlider;
+    }
+
+
+
 }
