@@ -39,7 +39,7 @@ public class View {
 
 private Model model;
 private Controller controller;
-private LayoutController layoutController;
+
 private AnchorPane root;
 private Scene scene;
 private Stage stage;
@@ -95,19 +95,7 @@ private void initGui(){
         this.controller = controller;
     }
 
-    /**
-     * @return the layoutController
-     */
-    public LayoutController getLayoutController() {
-        return layoutController;
-    }
-
-    /**
-     * @param layoutController the layoutController to set
-     */
-    public void setLayoutController(LayoutController layoutController) {
-        this.layoutController = layoutController;
-    }
+ 
 
     /**
      * @return the scene
