@@ -33,7 +33,7 @@ private Stage stage;
 
 public void createScene ()
     {
-	Scene scene = null;
+	
 
 	try
 	{
