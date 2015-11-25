@@ -7,7 +7,9 @@ package balls.controller;
 
 import balls.model.Model;
 import balls.view.View;
+import javafx.event.EventHandler;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -24,17 +26,36 @@ public class Controller {
     private Model model;
     private View view;
     
+    private Slider gravitySlider;
+    
 
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        initItems();
+        initEventHandlers();
+    }
+    
+    private void initEventHandlers() {
+        gravitySlider.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent event) {
+                
+            }
+        });
+    }
+
+    private void initItems() {
+        //sliders
+        gravitySlider = view.getGravitySlider();
     }
 
     public Controller() {
     }
     
     public void setModelGravity(){
-        model.setGravity((float)view.getGravitySlider().getValue());
+        model.setGravity((float)gravitySlider.getValue());
     }
 
     public float computeAcceleration() {
@@ -103,5 +124,7 @@ public class Controller {
     public void setView(View view) {
         this.view = view;
     }
+
+    
     
 }
