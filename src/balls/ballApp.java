@@ -32,7 +32,7 @@ public class ballApp extends Application {
         
 	mainStage = primaryStage;
 
-	mainStage.setTitle ("Pendulum Application");
+	mainStage.setTitle ("Ball Application");
 	mainStage.setScene (scene);
 	
 	mainStage.setResizable (false);
