@@ -29,9 +29,9 @@ public class Model {
 
     public Model() {
         this.weight = 10f;
-        this.acceleration = 0.5f;
+        this.acceleration = 0.1f;
         this.radius = 10f;
-        this.velocity = 0.5f;
+        this.velocity = 0.1f;
         this.distance = 0f;
         this.time = 0.1f;
         this.state = START;

@@ -10,6 +10,11 @@ import balls.model.Model;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
+import javafx.animation.TranslateTransitionBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -24,12 +29,15 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -47,7 +55,8 @@ public class View {
     private Label gravityValueLabel;
     private GraphicsContext gc;
     private Button startButton;
-
+    private Circle ball2;
+    private Pane canvas2;
     public View() {
         initGui();
     }
@@ -55,11 +64,16 @@ public class View {
     private void initGui() {
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
-        AnchorPane canPane = new AnchorPane();
+       // AnchorPane canPane = new AnchorPane();
+        canvas2 = new Pane();
+       canvas2.setPrefSize(400, 400);
+         ball2 = new Circle(20,20,20);
+        ball2.setStyle("-fx-border: solid,-fx-color:#000000");
+        canvas2.getChildren().add(ball2);
         
-        Canvas canvas = new Canvas(400, 400);
-        gc = canvas.getGraphicsContext2D();
-        canPane.setStyle("-fx-background-color: #96bbfc");
+        //Canvas canvas = new Canvas(400, 400);
+        //gc = canvas.getGraphicsContext2D();
+        //canPane.setStyle("-fx-background-color: light-blue");
        
         Label gravityLabel = new Label("Gravity");
         setGravitySlider(new Slider(1, 30,9));
@@ -72,9 +86,9 @@ public class View {
         gridPane.add(getGravityValueLabel(), 2, 0);
         gridPane.add(startButton,1,1);
 
-        canPane.getChildren().add(canvas);
-
-        vBox.getChildren().addAll(canPane, gridPane);
+       // canPane.getChildren().add(canvas);
+       vBox.getChildren().addAll(canvas2, gridPane);
+      //  vBox.getChildren().addAll(canPane, gridPane);
 
         scene = new Scene(vBox);
 
@@ -152,8 +166,29 @@ public class View {
 
    
     public void drawBall(float x, float y,float r) {
-        gc.setFill(Color.BLACK);
-        gc.fillOval(x, y, r, r);
+//        gc.setFill(Color.LIGHTBLUE);
+ //       gc.fillRect(0, 0, 400, 400);
+ //       gc.setFill(Color.BLACK);
+ //       gc.fillOval(x, y, r, r);
+        TranslateTransition trans;
+        trans = TranslateTransitionBuilder.create()
+                
+                .node(ball2)
+                .toY(y)
+                .autoReverse(false)
+                .cycleCount(0)
+                .interpolator(Interpolator.LINEAR)
+                .build();
+      
+        trans.setOnFinished(event -> {
+            ball2.setCenterY(ball2.getCenterY()+ball2.getTranslateY());
+            ball2.setTranslateY(0);
+            Circle tmp = (Circle)canvas2.getChildren().get(0);
+        System.out.println(tmp.getCenterY());
+        });
+          trans.play();
+        
+                
     }
 
     /**

@@ -7,6 +7,8 @@ package balls.controller;
 
 import balls.model.Model;
 import balls.view.View;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -57,21 +59,18 @@ public class Controller {
 
                 Thread t = new Thread() {
                     public void run() {
+
                         while (true) {
                             view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
-                            switch(model.getState()){
+                            switch (model.getState()) {
                                 case START:
                                     model.setState(FREE_FALL);
                                     break;
                             }
                             System.out.println("vel: " + model.getVelocity());
-                            model.setTime(model.getTime() + 0.2f);
+                            model.setTime(model.getTime() + 0.1f);
                             computeVelocity();
-                            try {
-                                Thread.sleep(100);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            
                         }
                     }
                 };
@@ -79,13 +78,15 @@ public class Controller {
                 t.start();
                 
             }
+
         });
+
     }
 
     private void initItems() {
         //sliders
         gravitySlider = view.getGravitySlider();
-        model.setGravity((float)gravitySlider.getValue());
+        model.setGravity((float) gravitySlider.getValue());
         //button
         startButton = view.getButton();
     }
