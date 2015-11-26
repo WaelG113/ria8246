@@ -64,16 +64,16 @@ public class View {
     private void initGui() {
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
-       // AnchorPane canPane = new AnchorPane();
+      AnchorPane canPane = new AnchorPane();
         canvas2 = new Pane();
        canvas2.setPrefSize(400, 400);
          ball2 = new Circle(20,20,20);
         ball2.setStyle("-fx-border: solid,-fx-color:#000000");
         canvas2.getChildren().add(ball2);
         
-        //Canvas canvas = new Canvas(400, 400);
-        //gc = canvas.getGraphicsContext2D();
-        //canPane.setStyle("-fx-background-color: light-blue");
+        Canvas canvas = new Canvas(400, 400);
+        gc = canvas.getGraphicsContext2D();
+        canPane.setStyle("-fx-background-color: blue");
        
         Label gravityLabel = new Label("Gravity");
         setGravitySlider(new Slider(1, 30,9));
@@ -86,9 +86,9 @@ public class View {
         gridPane.add(getGravityValueLabel(), 2, 0);
         gridPane.add(startButton,1,1);
 
-       // canPane.getChildren().add(canvas);
-       vBox.getChildren().addAll(canvas2, gridPane);
-      //  vBox.getChildren().addAll(canPane, gridPane);
+        canPane.getChildren().add(canvas);
+     //  vBox.getChildren().addAll(canvas2, gridPane);
+        vBox.getChildren().addAll(canPane, gridPane);
 
         scene = new Scene(vBox);
 
@@ -165,30 +165,18 @@ public class View {
     }
 
   
-}
+
     public void drawBall(float x, float y,float r) {
-//        gc.setFill(Color.LIGHTBLUE);
- //       gc.fillRect(0, 0, 400, 400);
- //       gc.setFill(Color.BLACK);
- //       gc.fillOval(x, y, r, r);
- intpol ASD = new intpol();
-        TranslateTransition trans;
-        trans = TranslateTransitionBuilder.create()
-                .duration(new Duration(10000))
-                .node(ball2)
-                .toY(400)
-                .autoReverse(true)
-                .cycleCount(99)
-                .interpolator()
-                .build();
-      
-        trans.setOnFinished(event -> {
-            ball2.setCenterY(ball2.getCenterY()+ball2.getTranslateY());
-            ball2.setTranslateY(0);
-            Circle tmp = (Circle)canvas2.getChildren().get(0);
-        System.out.println(tmp.getCenterY());
-        });
-          trans.play();
+        gc.setFill(Color.BLUE);
+        gc.fillRect(0, 0, 400, 400);
+        gc.setFill(Color.BLACK);
+        gc.fillOval(x, y, r, r);
+ 
+        
+//        ball2.setTranslateY(y);
+//        ball2.setCenterY(ball2.getCenterY()+ball2.getTranslateY());
+//        System.out.println(ball2.getCenterY());
+        
         
                 
     }
