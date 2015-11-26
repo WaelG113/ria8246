@@ -70,7 +70,11 @@ public class Controller {
                             System.out.println("vel: " + model.getVelocity());
                             model.setTime(model.getTime() + 0.1f);
                             computeVelocity();
-                            
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 };
