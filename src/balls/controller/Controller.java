@@ -32,6 +32,8 @@ public class Controller {
     private View view;
 
     private Slider gravitySlider;
+    private Slider elaSlider;
+    private Slider xSlider;
     private Button startButton;
 
     public Controller(Model model, View view) {
@@ -56,22 +58,26 @@ public class Controller {
 
             @Override
             public void handle(MouseEvent event) {
-
+                view.startAnim(model.getxChange(),0,model.getGravity(),(double)model.getElasticity());
+                
                 Thread t = new Thread() {
+                    @Override
                     public void run() {
+                        //view.startAnim(0,0.2,2,1);
+//                        while (true) {
+//                            view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
+//                            switch (model.getState()) {
+//                                case START:
+//                                    model.setState(FREE_FALL);
+//                                    break;
+//                            }
+//                            System.out.println("vel: " + model.getVelocity());
+//                            model.setTime(model.getTime() + 0.1f);
+//                            computeVelocity();
+//                           
+//                        }
+                         
 
-                        while (true) {
-                            view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
-                            switch (model.getState()) {
-                                case START:
-                                    model.setState(FREE_FALL);
-                                    break;
-                            }
-                            System.out.println("vel: " + model.getVelocity());
-                            model.setTime(model.getTime() + 0.1f);
-                            computeVelocity();
-                           
-                        }
                     }
                 };
                 t.setDaemon(true);
@@ -87,6 +93,11 @@ public class Controller {
         //sliders
         gravitySlider = view.getGravitySlider();
         model.setGravity((float) gravitySlider.getValue());
+        elaSlider = view.getElaSlider();
+        model.setElasticity(elaSlider.getValue());
+        xSlider = view.getxSlider();
+        model.setxChange(xSlider.getValue());
+
         //button
         startButton = view.getButton();
     }

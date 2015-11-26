@@ -26,6 +26,8 @@ public class Model {
     private float gravity;
     private float x;
     private float y;
+    private double elasticity;
+    private double xChange;
 
     public Model() {
         this.weight = 10f;
@@ -181,5 +183,33 @@ public class Model {
      */
     public void setY(float y) {
         this.y = y;
+    }
+
+    /**
+     * @return the elasticity
+     */
+    public double getElasticity() {
+        return elasticity;
+    }
+
+    /**
+     * @param elasticity the elasticity to set
+     */
+    public void setElasticity(double elasticity) {
+        this.elasticity = elasticity;
+    }
+
+    /**
+     * @return the xChange
+     */
+    public double getxChange() {
+        return xChange;
+    }
+
+    /**
+     * @param xChange the xChange to set
+     */
+    public void setxChange(double xChange) {
+        this.xChange = xChange;
     }
 }
