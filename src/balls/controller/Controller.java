@@ -57,30 +57,30 @@ public class Controller {
             @Override
             public void handle(MouseEvent event) {
 
-                Thread t = new Thread() {
-                    public void run() {
-
-                        while (true) {
-                            view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
-                            switch (model.getState()) {
-                                case START:
-                                    model.setState(FREE_FALL);
-                                    break;
-                            }
-                            System.out.println("vel: " + model.getVelocity());
-                            model.setTime(model.getTime() + 0.1f);
-                            computeVelocity();
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }
-                };
-                t.setDaemon(true);
-                t.start();
-                
+//                Thread t = new Thread() {
+//                    public void run() {
+//
+//                        while (true) {
+//                            view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
+//                            switch (model.getState()) {
+//                                case START:
+//                                    model.setState(FREE_FALL);
+//                                    break;
+//                            }
+//                            System.out.println("vel: " + model.getVelocity());
+//                            model.setTime(model.getTime() + 0.1f);
+//                            computeVelocity();
+//                            try {
+//                                Thread.sleep(500);
+//                            } catch (InterruptedException ex) {
+//                                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                    }
+//                };
+//                t.setDaemon(true);
+//                t.start();
+                view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
             }
 
         });

@@ -164,20 +164,22 @@ public class View {
         this.gravityValueLabel = gravityValueLabel;
     }
 
-   
+  
+}
     public void drawBall(float x, float y,float r) {
 //        gc.setFill(Color.LIGHTBLUE);
  //       gc.fillRect(0, 0, 400, 400);
  //       gc.setFill(Color.BLACK);
  //       gc.fillOval(x, y, r, r);
+ intpol ASD = new intpol();
         TranslateTransition trans;
         trans = TranslateTransitionBuilder.create()
-                
+                .duration(new Duration(10000))
                 .node(ball2)
-                .toY(y)
-                .autoReverse(false)
-                .cycleCount(0)
-                .interpolator(Interpolator.LINEAR)
+                .toY(400)
+                .autoReverse(true)
+                .cycleCount(99)
+                .interpolator()
                 .build();
       
         trans.setOnFinished(event -> {
