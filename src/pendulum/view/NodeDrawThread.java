@@ -6,18 +6,14 @@
 package pendulum.view;
 
 import javafx.application.Platform;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 /**
- * This class originates from site
- * <a href="http://rosettacode.org/wiki/Animate_a_pendulum#Java">Rosetta
- * Code</a>
  *
  * @author jdev
  */
-public class CanvasDrawThread extends Thread
+public class NodeDrawThread extends Thread
 {
 
     private double length;
@@ -25,18 +21,23 @@ public class CanvasDrawThread extends Thread
     private double angle;
     private double mass;
 
-    private Canvas pendulumDrawCanvas;
     private boolean isOperating;
 
-    public CanvasDrawThread (Canvas pendulumDrawCanvas, double length, double acceleration, double angle, double mass)
+    private Circle pendulumBall;
+    private Line pendulumString;
+
+    public NodeDrawThread (double length, double acceleration, double angle, double mass, Circle pendulumBall, Line pendulumString)
     {
-	this.pendulumDrawCanvas = pendulumDrawCanvas;
-	this.isOperating = true;
 	this.length = length;
 	this.acceleration = acceleration;
 	this.angle = angle;
+	this.mass = mass;
+	this.pendulumBall = pendulumBall;
+	this.pendulumString = pendulumString;
 
-	drawOnCanvas ();
+	this.isOperating = true;
+	
+	drawOnNode ();
     }
 
     public double getLength ()
@@ -59,6 +60,16 @@ public class CanvasDrawThread extends Thread
 	return mass;
     }
 
+    public Circle getPendulumBall ()
+    {
+	return pendulumBall;
+    }
+
+    public Line getPendulumString ()
+    {
+	return pendulumString;
+    }
+
     public void setLength (double length)
     {
 	this.length = length;
@@ -79,30 +90,31 @@ public class CanvasDrawThread extends Thread
 	this.mass = mass;
     }
 
-    public void setPendulumDrawCanvas (Canvas pendulumDrawCanvas)
+    public void setPendulumBall (Circle pendulumBall)
     {
-	this.pendulumDrawCanvas = pendulumDrawCanvas;
+	this.pendulumBall = pendulumBall;
     }
 
-    private void drawOnCanvas ()
+    public void setPendulumString (Line pendulumString)
     {
-	GraphicsContext gc = pendulumDrawCanvas.getGraphicsContext2D ();
-	int width = (int) pendulumDrawCanvas.getWidth ();
-	int height = (int) pendulumDrawCanvas.getHeight ();
+	this.pendulumString = pendulumString;
+    }
 
-	gc.setFill (Color.WHITE);
-	gc.fillRect (0, 0, width, height);
-	gc.setFill (Color.BLACK);
+    public void drawOnNode ()
+    {
+	int ballOriginalX = (int) pendulumBall.getLayoutX ();
+	int ballOriginalY = (int) pendulumBall.getLayoutY ();
 
-	int anchorX = width / 2;
-	int anchorY = height / 4;
+	int anchorX = (int) pendulumString.getStartX ();
+	int anchorY = (int) pendulumString.getStartY ();
 
 	int ballX = anchorX + (int) (Math.sin (angle) * length);
 	int ballY = anchorY + (int) (Math.cos (angle) * length);
-
-	gc.strokeLine (anchorX, anchorY, ballX, ballY); // "String"
-	gc.fillOval (anchorX - 3, anchorY - 4, 7, 7); // "Anchor"
-	gc.fillOval (ballX - 7, ballY - 7, 14, 14); // "Ball"
+	
+	pendulumString.setEndX (ballX);
+	pendulumString.setEndY (ballY);
+	pendulumBall.translateXProperty ().set (ballX - ballOriginalX);
+	pendulumBall.translateYProperty ().set (ballY - ballOriginalY);
 
 	return;
     }
@@ -116,16 +128,17 @@ public class CanvasDrawThread extends Thread
 
 	while (isOperating)
 	{
-	    angleAccel = - acceleration / length * Math.sin (angle);
+	    angleAccel = -acceleration / length * Math.sin (angle);
 	    angleVelocity += angleAccel * dt;
 	    angle += angleVelocity * dt;
+
 	    Platform.runLater (new Runnable ()
 	    {
 
 		@Override
 		public void run ()
 		{
-		    drawOnCanvas ();
+		    drawOnNode ();
 		}
 	    });
 
@@ -141,4 +154,5 @@ public class CanvasDrawThread extends Thread
 
 	return;
     }
+
 }

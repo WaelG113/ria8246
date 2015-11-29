@@ -25,6 +25,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import pendulum.model.Model;
 
@@ -43,8 +45,15 @@ public class ExperimentLayoutController implements Initializable
      */
     @FXML
     private Canvas pendulumDrawCanvas;
+    
+    @FXML
+    private Circle pendulumBall;
+    
+    @FXML
+    private Line pendulumString;
 
     private CanvasDrawThread canvasPendulum;
+    private NodeDrawThread nodePendulum;
 
     @FXML
     private TextField stringLengthTextField;
@@ -85,7 +94,6 @@ public class ExperimentLayoutController implements Initializable
     {
 	initTextFieldsFromSliders ();
 	addListenersForSlidersChanging ();
-	// TODO initialize node!
 
 	return;
     }
@@ -289,6 +297,7 @@ public class ExperimentLayoutController implements Initializable
     public void initialise ()
     {
 	initSlidersFromModell ();
+	initializeNode ();
 	initializeCanvas ();
 
 	return;
@@ -353,6 +362,18 @@ public class ExperimentLayoutController implements Initializable
 
 	return;
     }
+    
+        private void initializeNode ()
+    {
+	double length = view.getController ().getModel ().getStringLength ();
+	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
+	// double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
+	double angle = Math.PI / 2;
+	double mass = view.getController ().getModel ().getMass ();
+	nodePendulum = new NodeDrawThread (length, acceleration, angle, mass, pendulumBall, pendulumString);
+	
+	return;
+    }
 
     private void initializeCanvas ()
     {
@@ -370,8 +391,24 @@ public class ExperimentLayoutController implements Initializable
     public void handleAnimateNode ()
     {
 	boolean isNodeSelected = nodeToggleButton.isSelected ();
-
-	System.out.println ("Node selected: " + isNodeSelected);
+	
+	double length = view.getController ().getModel ().getStringLength ();
+	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
+	// double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
+	double angle = Math.PI / 2;
+	double mass = view.getController ().getModel ().getMass ();
+	
+	if (isNodeSelected)
+	{
+	    // Start animation
+	    nodePendulum = new NodeDrawThread (length, acceleration, angle, mass, pendulumBall, pendulumString);
+	    nodePendulum.start ();
+	}
+	else
+	{
+	    // Stop animation
+	    nodePendulum.interrupt ();
+	}
 
 	return;
     }
@@ -391,7 +428,7 @@ public class ExperimentLayoutController implements Initializable
 
 	if (isCanvasSelected)
 	{
-	    // Start Animation
+	    // Start animation
 	    canvasPendulum = new CanvasDrawThread (pendulumDrawCanvas, length, acceleration, angle, mass);
 	    canvasPendulum.start ();
 	}

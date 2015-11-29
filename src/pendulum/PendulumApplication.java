@@ -35,7 +35,7 @@ public class PendulumApplication extends Application
     public static void main (String[] args)
     {
 	Application.setUserAgentStylesheet (STYLESHEET_CASPIAN);
-	PendulumApplication.launch (args);
+	Application.launch (args);
 
 	return;
     }
