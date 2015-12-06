@@ -90,7 +90,7 @@
                                     <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                  </GridPane.margin>
                               </Slider>
-                              <Slider fx:id="angleSlider" disable="true" max="90.0" min="-90.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Slider fx:id="angleSlider" max="90.0" min="5.0" value="90.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                  </GridPane.margin>

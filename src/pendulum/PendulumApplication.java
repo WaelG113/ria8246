@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pendulum.controller.Controller;
 import pendulum.model.Model;
 import pendulum.view.View;
@@ -27,6 +29,8 @@ public class PendulumApplication extends Application
 
     private Stage mainStage;
     private Scene mainScene;
+    
+    private static final Logger logger = LogManager.getLogger ();
 
     /**
      * @param args the command line arguments
@@ -34,7 +38,6 @@ public class PendulumApplication extends Application
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public static void main (String[] args)
     {
-	Application.setUserAgentStylesheet (STYLESHEET_CASPIAN);
 	Application.launch (args);
 
 	return;
@@ -49,6 +52,7 @@ public class PendulumApplication extends Application
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public void init () throws Exception
     {
+	Application.setUserAgentStylesheet (STYLESHEET_CASPIAN);
 	Font.loadFont (this.getClass ().getResource ("/pendulum/util/font/Amble-Regular.ttf").toExternalForm (), 12);
 	Font.loadFont (this.getClass ().getResource ("/pendulum/util/font/Amble-Bold.ttf").toExternalForm (), 12);
 
@@ -65,6 +69,8 @@ public class PendulumApplication extends Application
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public void start (Stage primaryStage)
     {
+	logger.info ("Starting application...");
+	
 	pendulumModel = new Model ();
 	pendulumView = new View ();
 	pendulumController = new Controller (pendulumView, pendulumModel);
@@ -94,7 +100,8 @@ public class PendulumApplication extends Application
     @Override
     public void stop () throws Exception
     {
-	// Log program termination - Log4J
+	logger.info ("Application is being stopped...");
+	
 	return;
     }
 }

@@ -37,21 +37,12 @@ public class Model
      */
     private double m;
 
-    // Idea start
-    private DoubleProperty origin;
-
-    // Idea end
     public Model ()
     {
 	g = 9.81;
 	l = 50;
-	a = 0;
+	a = 90;
 	m = 10;
-
-	// Separator
-	origin = new SimpleDoubleProperty ();
-	// origin.bind (null); // Causes Exception
-	// Modelltől lekéri a Controller
     }
 
     /**
