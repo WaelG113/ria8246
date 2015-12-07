@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/model/Model.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/view/ExperimentLayout.fxml</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/ExternalLoader.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/balls/ballApp.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/physicssimulator/PhysicsSimulator.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/view/View.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/view/CanvasDrawThread.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/balls/controller/Controller.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/balls/NewFXMain.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/view/ExperimentLayoutController.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/controller/Controller.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/pendulum/PendulumApplication.java</file>
-            <file>file:/C:/Users/n0g3/Documents/GitHub/Java2_VirtualPhysicsLab/src/balls/model/Model.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -6,6 +6,7 @@
 package balls.view;
 
 import balls.controller.Controller;
+import balls.controller.ballAnimation;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -65,7 +66,7 @@ public class View {
         Label elaLabel = new Label("Elasticity");
         Label xLabel = new Label("xChange");
         elaSlider = new Slider(0,5,0.9);
-        setxSlider(new Slider(0,2,0.1));
+        xSlider = new Slider(0,2,0.1);
         
         
         startButton = new Button("START");
@@ -77,7 +78,7 @@ public class View {
         gridPane.add(startButton, 3, 1);
         gridPane.add(elaSlider, 0, 1);
         gridPane.add(elaLabel,1,1);
-        gridPane.add(getxSlider(),0,2);
+        gridPane.add(xSlider,0,2);
         gridPane.add(xLabel,1,2);
 
 //        canPane.getChildren().add(canvas);
@@ -164,32 +165,19 @@ public class View {
         //      gc.setFill(Color.BLACK);
         //      gc.fillOval(x, y, r, r);
         
-        System.out.println(changeX);
-        double changeY=cY;
+        ballAnimation timer = new ballAnimation(cY,changeX,elasticity,gravity,ball2,
+                canvas2.getHeight(),canvas2.getWidth());
         
-        AnimationTimer timer = new AnimationTimer() {
-            long lastUpdate;
-            double changeY;
-            @Override
-            public void handle(long now) {
-                if (lastUpdate == 0) {
-                    lastUpdate = now ;
-                    return ;
-                }
-                long elapsedNanos = now - lastUpdate;
-                double elapsedSeconds = elapsedNanos / 1_000_000_000.0 ;
-                lastUpdate = now ;
-                ball2.setCenterX(ball2.getCenterX() + changeX);
-                if (ball2.getCenterY() + changeY + ball2.getRadius() >= canvas2.getHeight()) {
-                    changeY = - changeY * elasticity;
-                } else {
-                    changeY = changeY + gravity * elapsedSeconds ;
-                }
-                ball2.setCenterY(Math.min(ball2.getCenterY() + changeY, canvas2.getHeight() - ball2.getRadius()));
-            }
-            
-        };
         timer.start();
+//        AnimationTimer timer = new AnimationTimer() {
+//            
+//            @Override
+//            public void handle(long now) {
+//               
+//            }
+//            
+//        };
+//        timer.start();
         
 //        ball2.setTranslateY(y);
 //        ball2.setCenterY(ball2.getCenterY()+ball2.getTranslateY());

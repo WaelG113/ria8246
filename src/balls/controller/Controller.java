@@ -58,12 +58,12 @@ public class Controller {
 
             @Override
             public void handle(MouseEvent event) {
-                view.startAnim(model.getxChange(),0,model.getGravity(),(double)model.getElasticity());
+                view.startAnim((double)model.getxChange(),0,(double)model.getGravity(),(double)model.getElasticity());
                 
-                Thread t = new Thread() {
-                    @Override
-                    public void run() {
-                        //view.startAnim(0,0.2,2,1);
+//                Thread t = new Thread() {
+//                    @Override
+//                    public void run() {
+//                        //view.startAnim(0,0.2,2,1);
 //                        while (true) {
 //                            view.drawBall(model.getX(), model.getY() + model.getVelocity(), model.getRadius());
 //                            switch (model.getState()) {
@@ -76,12 +76,12 @@ public class Controller {
 //                            computeVelocity();
 //                           
 //                        }
-                         
-
-                    }
-                };
-                t.setDaemon(true);
-                t.start();
+//                         
+//
+//                    }
+//                };
+//                t.setDaemon(true);
+//                t.start();
                 
             }
 
@@ -94,9 +94,9 @@ public class Controller {
         gravitySlider = view.getGravitySlider();
         model.setGravity((float) gravitySlider.getValue());
         elaSlider = view.getElaSlider();
-        model.setElasticity(elaSlider.getValue());
+        model.setElasticity((float)elaSlider.getValue());
         xSlider = view.getxSlider();
-        model.setxChange(xSlider.getValue());
+        model.setxChange((float)xSlider.getValue());
 
         //button
         startButton = view.getButton();
