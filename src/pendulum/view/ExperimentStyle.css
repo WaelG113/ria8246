@@ -44,12 +44,12 @@ and open the template in the editor.
 
 #visualNodePane
 {
-    -fx-background-color: goldenrod;
+    -fx-background-color: #dedede;
 }
 
 #visualCanvasPane
 {
-    -fx-background-color: teal;
+    -fx-background-color: #dedede;
 }
 
 #pendulumCanvas

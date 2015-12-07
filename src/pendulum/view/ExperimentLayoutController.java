@@ -25,7 +25,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pendulum.model.Model;
 
 /**
@@ -37,6 +41,8 @@ public class ExperimentLayoutController implements Initializable
 {
 
     private View view;
+    
+    private static final Logger logger = LogManager.getLogger ();
 
     /**
      * This control will display the animated pendulum. (Canvas version.)
@@ -44,7 +50,14 @@ public class ExperimentLayoutController implements Initializable
     @FXML
     private Canvas pendulumDrawCanvas;
 
+    @FXML
+    private Circle pendulumBall;
+
+    @FXML
+    private Line pendulumString;
+
     private CanvasDrawThread canvasPendulum;
+    private NodeDrawThread nodePendulum;
 
     @FXML
     private TextField stringLengthTextField;
@@ -85,11 +98,14 @@ public class ExperimentLayoutController implements Initializable
     {
 	initTextFieldsFromSliders ();
 	addListenersForSlidersChanging ();
-	// TODO initialize node!
 
 	return;
     }
 
+    /**
+     * Sets the responsible object with this controller.
+     * @param view the responsible object with this controller
+     */
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public void setMain (View view)
     {
@@ -289,6 +305,7 @@ public class ExperimentLayoutController implements Initializable
     public void initialise ()
     {
 	initSlidersFromModell ();
+	initializeNode ();
 	initializeCanvas ();
 
 	return;
@@ -324,32 +341,56 @@ public class ExperimentLayoutController implements Initializable
     {
 	ChangeListener<Number> stringLengthChanged = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
 	{
-	    stringLengthTextField.setText (String.format ("%.2f", newValue.doubleValue ()));
-	    view.getController ().getModel ().setStringLength (newValue.doubleValue ());
+	    double length = newValue.doubleValue ();
+	    stringLengthTextField.setText (String.format ("%.2f", length));
+	    view.getController ().getModel ().setStringLength (length);
+	    logger.debug ("Length: " + length);
 	};
 
-	ChangeListener<Number> gravityAccelerationchanged = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
+	ChangeListener<Number> gravityAccelerationChanged = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
 	{
-	    gravityAccelerationTextField.setText (String.format ("%.2f", newValue.doubleValue ()));
-	    view.getController ().getModel ().setGravityAcceleration (newValue.doubleValue ());
+	    double acceleration = newValue.doubleValue ();
+	    gravityAccelerationTextField.setText (String.format ("%.2f", acceleration));
+	    view.getController ().getModel ().setGravityAcceleration (acceleration);
+	    logger.debug ("Acceleration: " + acceleration);
 	};
 
 	ChangeListener<Number> angleChanged = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
 	{
-	    angleTextField.setText (String.format ("%.2f", newValue.doubleValue ()));
-	    view.getController ().getModel ().setAngle (newValue.doubleValue ());
+	    double angle = newValue.doubleValue ();
+	    angleTextField.setText (String.format ("%.2f", angle));
+	    view.getController ().getModel ().setAngle (angle);
+	    logger.debug ("Angle: " + angle);
 	};
 
 	ChangeListener<Number> massChanged = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
 	{
-	    massTextField.setText (String.format ("%.2f", newValue.doubleValue ()));
-	    view.getController ().getModel ().setMass (newValue.doubleValue ());
+	    double mass = newValue.doubleValue ();
+	    massTextField.setText (String.format ("%.2f", mass));
+	    view.getController ().getModel ().setMass (mass);
+	    logger.debug ("Mass: " + mass);
 	};
 
 	stringLengthSlider.valueProperty ().addListener (stringLengthChanged);
-	gravityAccelerationSlider.valueProperty ().addListener (gravityAccelerationchanged);
+	gravityAccelerationSlider.valueProperty ().addListener (gravityAccelerationChanged);
 	angleSlider.valueProperty ().addListener (angleChanged);
 	massSlider.valueProperty ().addListener (massChanged);
+
+	return;
+    }
+
+    private void initializeNode ()
+    {
+	double length = view.getController ().getModel ().getStringLength ();
+	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
+	double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
+	double mass = view.getController ().getModel ().getMass ();
+	nodePendulum = new NodeDrawThread (length, acceleration, angle, mass, pendulumBall, pendulumString);
+	
+	logger.debug ("Length: " + length);
+	logger.debug ("Acceleration: " + acceleration);
+	logger.debug ("Angle: " + angle);
+	logger.debug ("Mass: " + mass);
 
 	return;
     }
@@ -358,48 +399,83 @@ public class ExperimentLayoutController implements Initializable
     {
 	double length = view.getController ().getModel ().getStringLength ();
 	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
-	// double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
-	double angle = Math.PI / 2;
+	double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
 	double mass = view.getController ().getModel ().getMass ();
 	canvasPendulum = new CanvasDrawThread (pendulumDrawCanvas, length, acceleration, angle, mass);
+	
+	logger.debug ("Length: " + length);
+	logger.debug ("Acceleration: " + acceleration);
+	logger.debug ("Angle: " + angle);
+	logger.debug ("Mass: " + mass);
 
 	return;
     }
 
+    /**
+     * Event handler for the Node Animation ToggleButton
+     */
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public void handleAnimateNode ()
     {
 	boolean isNodeSelected = nodeToggleButton.isSelected ();
 
-	System.out.println ("Node selected: " + isNodeSelected);
+	double length = view.getController ().getModel ().getStringLength ();
+	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
+	double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
+	double mass = view.getController ().getModel ().getMass ();
+
+	if (isNodeSelected)
+	{
+	    // Start animation
+	    nodePendulum = new NodeDrawThread (length, acceleration, angle, mass, pendulumBall, pendulumString);
+	    nodePendulum.start ();
+	    logger.info ("Node Animation started...");
+	    
+	}
+	else
+	{
+	    // Stop animation
+	    nodePendulum.interrupt ();
+	    logger.info ("Node Animation stopped...");
+	}
+	logger.debug ("Length: " + length);
+	logger.debug ("Acceleration: " + acceleration);
+	logger.debug ("Angle: " + angle);
+	logger.debug ("Mass: " + mass);
 
 	return;
     }
 
+    /**
+     * Event handler for the Canvas Animation ToggleButton
+     */
     @SuppressWarnings ("UnnecessaryReturnStatement")
     public void handleAnimateCanvas ()
     {
 	boolean isCanvasSelected = canvasToggleButton.isSelected ();
 
-	System.out.println ("Canvas selected: " + isCanvasSelected);
-
 	double length = view.getController ().getModel ().getStringLength ();
 	double acceleration = view.getController ().getModel ().getGravityAcceleration ();
-	// double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
-	double angle = Math.PI / 2;
+	double angle = Model.convertDegreeToRadian (view.getController ().getModel ().getAngle ());
 	double mass = view.getController ().getModel ().getMass ();
 
 	if (isCanvasSelected)
 	{
-	    // Start Animation
+	    // Start animation
 	    canvasPendulum = new CanvasDrawThread (pendulumDrawCanvas, length, acceleration, angle, mass);
 	    canvasPendulum.start ();
+	    logger.info ("Canvas Animation started...");
 	}
 	else
 	{
 	    // Stop animation
 	    canvasPendulum.interrupt ();
+	    logger.info ("Canvas Animation stopped...");
 	}
+	logger.debug ("Length: " + length);
+	logger.debug ("Acceleration: " + acceleration);
+	logger.debug ("Angle: " + angle);
+	logger.debug ("Mass: " + mass);
 
 	return;
     }

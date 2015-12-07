@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pendulum.model.Model;
 import pendulum.view.View;
 
@@ -21,6 +23,8 @@ public class Controller
 
     private final View view;
     private final Model model;
+    
+    private static final Logger logger = LogManager.getLogger ();
 
     /**
      * The expected controller constructor for a MVC architecture.
@@ -33,11 +37,21 @@ public class Controller
 	this.model = model;
     }
 
+    /**
+     * Get the View of the MVC pattern.
+     * 
+     * @return the associated View
+     */
     public View getView ()
     {
 	return view;
     }
 
+    /**
+     * Get the Model of the MVC pattern.
+     * 
+     * @return the associated Model
+     */
     public Model getModel ()
     {
 	return model;
@@ -53,6 +67,7 @@ public class Controller
     public void savePropertiesToFile (OutputStream outputStream, Properties properties) throws IOException
     {
 	properties.store (outputStream, "Modifiable Pendulum Properties");
+	logger.trace ("Properties saved...");
 	
 	return;
     }
@@ -67,6 +82,7 @@ public class Controller
     {
 	Properties pendulumProperties = new Properties ();
 	pendulumProperties.load (inputStream);
+	logger.trace ("Properties loaded...");
 	
 	return pendulumProperties;
     }
